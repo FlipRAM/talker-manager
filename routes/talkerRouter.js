@@ -23,5 +23,7 @@ router.put('/:id',
   middleware.talkMiddleware,
   middleware.ifTalk,
   services.updateTalker);
-  
+
+router.delete('/:id', middleware.tokenVerification, services.deleteTalker);
+
 module.exports = { router };
