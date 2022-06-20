@@ -1,9 +1,8 @@
 const express = require('express');
 // const middleware = require('../middlewares/index');
 const router = express.Router();
-const services = require('../services/talkerService');
+const services = require('../services/loginService');
 
-router.get('', services.getTalkers);
-router.get('/:id', services.getTalkerId);
+router.post('', services.createUser);
 
 module.exports = { router };
