@@ -77,10 +77,21 @@ const deleteTalker = async (req, res, _next) => {
   return res.status(204).json();
 };
 
+const getByName = async (req, res, _next) => {
+  const { q } = req.query;
+  const talkers = await readTalkers();
+  const matches = talkers.filter((talker) => talker.name.includes(q));
+
+  if (!q) return res.status(200).json(talkers);
+  if (!matches) return res.status(200).json([]);
+  return res.status(200).json(matches);
+};
+
 module.exports = {
   getTalkers,
   getTalkerId,
   addTalker,
   updateTalker,
   deleteTalker,
+  getByName,
 };

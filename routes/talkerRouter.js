@@ -6,6 +6,8 @@ const services = require('../services/talkerService');
 
 router.get('', services.getTalkers);
 
+router.get('/search', middleware.tokenVerification, services.getByName);
+
 router.get('/:id', services.getTalkerId);
 
 router.post('',
