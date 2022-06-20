@@ -50,8 +50,28 @@ const addTalker = async (req, res, _next) => {
   return res.status(201).json(newTalker);
 };
 
+const updateTalker = async (req, res, _next) => {
+  const { id } = req.params;
+  const { name, age, talk } = req.body;
+  const talkers = await readTalkers();
+  console.log(talkers);
+  const oldTalker = talkers.find((talker) => talker.id === parseInt(id, 10));
+  const newTalker = {
+    id: parseInt(id, 10),
+    name,
+    age,
+    talk,
+  };
+  const index = talkers.indexOf(oldTalker);
+  talkers[index] = newTalker;
+  console.log(talkers);
+  await writeTalkers(talkers);
+  return res.status(200).json(newTalker);
+};
+
 module.exports = {
   getTalkers,
   getTalkerId,
   addTalker,
+  updateTalker,
 };
